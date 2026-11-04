@@ -26,13 +26,15 @@ function Contents({ index }: { index: GuideSearchItem[] }) {
     <label className={styles.searchLabel} htmlFor={id}>ガイド内を検索</label>
     <input id={id} type="search" placeholder="例：検算、会話、Redis" value={query} onChange={(e) => setQuery(e.target.value)} className={styles.search} />
     {normalized ? <div className={styles.searchResults}>
-      <p role="status">{found.length}章が見つかりました</p>
+      <p role="status">{found.length}ページが見つかりました</p>
       {found.map((item) => <Link key={item.slug} href={`/guide/${item.slug}`}><strong>{item.title}</strong><span>{excerpt(item.text, normalized)}</span></Link>)}
       {!found.length ? <p>別の言葉でもお試しください。ファイル名は「ファイルの役割」で検索できます。</p> : null}
       <button type="button" onClick={() => setQuery("")} className={styles.textButton}>検索を解除</button>
     </div> : <nav aria-label="学習ガイドの章">
       <Link href="/guide" className={styles.coverLink} aria-current={pathname === "/guide" ? "page" : undefined}>ガイドの表紙</Link>
       <Link href="/guide/quick" className={styles.quickLink} aria-current={pathname === "/guide/quick" ? "page" : undefined}>3分で分かる版<small>はじめての方へ</small></Link>
+      <Link href="/guide/detail" className={styles.quickLink} aria-current={pathname.startsWith("/guide/detail") && !pathname.startsWith("/guide/detail/setup") ? "page" : undefined}>くわしく読む<small>使い方とプログラムのしくみ</small></Link>
+      <Link href="/guide/detail/setup-overview" className={styles.quickLink} aria-current={pathname.startsWith("/guide/detail/setup") ? "page" : undefined}>動かす準備<small>環境構築・GitHub・APIキー</small></Link>
       {guideGroups.map((group) => <div key={group} className={styles.navGroup}>
         <p>{group}</p>
         {guideChapters.map((chapter, i) => chapter.group === group ? <Link href={`/guide/${chapter.slug}`} key={chapter.slug} className={styles.chapterLink} aria-current={pathname === `/guide/${chapter.slug}` ? "page" : undefined}><span>{String(i + 1).padStart(2, "0")}</span>{chapter.short}<ChapterStatus slug={chapter.slug} compact /></Link> : null)}

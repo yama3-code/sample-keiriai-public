@@ -1,0 +1,158 @@
+/* 「くわしく読む」（詳細版）専用の見た目。文字は本編と同じく大きめにし、スマホでは縦に並べる。 */
+
+/* 表紙 */
+.intro { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 28px; align-items: center; margin-bottom: 30px; }
+.intro p { font-size: 17px; line-height: 2; margin: 0 0 12px; }
+.introArt { display: flex; justify-content: center; gap: 6px; }
+
+.ways { list-style: none; padding: 0; margin: 0 0 42px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.ways li { border: 1px solid #d5e0e7; background: #fff; border-radius: 10px; padding: 18px; min-width: 0; }
+.ways li.current { border: 2px solid #35648d; background: #eef4f8; }
+.ways small { display: block; font-size: 13px; color: #56728b; font-weight: 700; }
+.ways strong { display: block; font-size: 18px; color: #153f65; margin: 4px 0 8px; }
+.ways p { margin: 0; font-size: 15px; line-height: 1.85; color: #3d5266; }
+.ways a { display: inline-block; margin-top: 10px; font-size: 15px; font-weight: 700; color: #234564; }
+
+.sectionTitle { font-size: 23px; margin: 0 0 18px; line-height: 1.6; }
+.topics { list-style: none; padding: 0; margin: 0 0 36px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.topic { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; height: 100%; padding: 18px; border: 1px solid #cbd7df; border-radius: 10px; background: #fff; color: inherit; text-decoration: none; }
+.topic:hover { border-color: #35648d; background: #f6f9fb; }
+.topicNo { width: 40px; height: 40px; border-radius: 50%; background: #183d60; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 16px; }
+.topicScene { display: inline-block; font-size: 13px; font-weight: 700; color: #8a5a17; background: #fdf1dc; border-radius: 999px; padding: 1px 10px; }
+.topic strong { display: block; font-size: 18px; line-height: 1.6; color: #153f65; margin: 6px 0 4px; }
+.topic p { margin: 0; font-size: 15px; line-height: 1.85; color: #3d5266; }
+.topicMeta { display: block; margin-top: 8px; font-size: 13px; color: #5f7181; }
+
+/* 記事の冒頭 */
+.scene { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: -10px 0 26px; }
+.scene span { font-size: 14px; font-weight: 700; color: #8a5a17; background: #fdf1dc; border-radius: 999px; padding: 3px 14px; }
+
+/* 画面の見取り図（実際の画面を簡単にした絵） */
+.screen { border: 2px solid #183d60; border-radius: 10px; overflow: hidden; background: #fff; }
+.screenBar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #183d60; color: #fff; font-size: 14px; font-weight: 700; }
+.screenBar i { width: 9px; height: 9px; border-radius: 50%; background: #ffffff88; display: inline-block; }
+.screenBar span { margin-left: 8px; }
+.screenBody { padding: 14px; display: grid; gap: 10px; }
+.screenRow { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px; border: 1px dashed #a9bccb; border-radius: 8px; background: #f7f9fb; }
+.screenRow.key { border-style: solid; border-color: #d9892b; background: #fdf6e9; }
+.screenNo { width: 30px; height: 30px; border-radius: 50%; background: #d9892b; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 15px; }
+.screenRow strong { display: block; font-size: 16px; color: #153f65; line-height: 1.6; }
+.screenRow p { margin: 2px 0 0; font-size: 15px; line-height: 1.8; color: #3d5266; }
+.screenButton { display: inline-block; margin-top: 6px; padding: 4px 12px; border-radius: 4px; background: #183d60; color: #fff; font-size: 14px; font-weight: 700; }
+
+/* 横棒グラフ（配賦の比率） */
+.bars { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.bars li { display: grid; grid-template-columns: 9em minmax(0, 1fr) 8.5em; gap: 12px; align-items: center; font-size: 15px; }
+.barLabel { font-weight: 700; color: #153f65; overflow-wrap: anywhere; }
+.barTrack { height: 22px; background: #eef2f5; border-radius: 4px; overflow: hidden; }
+.barFill { height: 100%; background: #35648d; border-radius: 4px; min-width: 3px; }
+.barFill.muted { background: #93a4b3; }
+.barValue { text-align: right; font-variant-numeric: tabular-nums; color: #29465f; }
+.barValue small { display: block; font-size: 13px; color: #5f7181; }
+
+/* 計算の式 */
+.calc { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; }
+.calcBox { flex: 1 1 140px; border: 1px solid #d5e0e7; background: #f3f7f9; border-radius: 10px; padding: 12px 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.calcBox small { font-size: 13px; color: #4f6679; font-weight: 700; }
+.calcBox strong { font-size: 24px; color: #183d60; font-variant-numeric: tabular-nums; line-height: 1.4; }
+.calcBox.result { background: #eef8f2; border-color: #b9dcc7; }
+.calcBox.result strong { color: #2d7a52; }
+.calcOp { flex: none; align-self: center; font-size: 26px; font-weight: 700; color: #35648d; }
+
+/* 打ち消し合う例の小さな表 */
+.mini { width: 100%; border-collapse: collapse; font-size: 15px; }
+.mini th, .mini td { padding: 10px 12px; border-bottom: 1px solid #dbe1e4; text-align: right; font-variant-numeric: tabular-nums; }
+.mini th:first-child, .mini td:first-child { text-align: left; }
+.mini th { background: #edf0ef; font-size: 14px; color: #3a536b; }
+.mini .bad { color: #c0483a; font-weight: 700; }
+.mini .good { color: #2d7a52; font-weight: 700; }
+
+/* よくある疑問 */
+.faq { display: grid; gap: 12px; margin: 8px 0 30px; }
+.faqItem { border: 1px solid #cbd7df; border-radius: 10px; background: #fff; }
+.faqItem > summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: 32px minmax(0, 1fr) 20px; gap: 12px; align-items: start; padding: 16px 18px; font-size: 17px; font-weight: 700; color: #153f65; line-height: 1.7; }
+.faqItem > summary::-webkit-details-marker { display: none; }
+.faqItem > summary::after { content: "＋"; color: #35648d; }
+.faqItem[open] > summary::after { content: "－"; }
+.faqMark { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; font-weight: 700; background: #183d60; color: #fff; }
+.faqAnswer { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 12px; padding: 0 18px 16px; }
+.faqAnswer .faqMark { background: #2d7a52; }
+.faqAnswer p { margin: 0; font-size: 16px; line-height: 1.95; color: #2f4558; }
+
+.pageNote { margin: 34px 0 0; padding: 18px 20px; border-radius: 10px; background: #f0f2ef; font-size: 15px; line-height: 1.9; color: #3d5266; }
+.pageNote strong { color: #153f65; }
+
+@media (max-width: 900px) {
+  .ways { grid-template-columns: 1fr; }
+  .topics { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .intro { grid-template-columns: 1fr; }
+  .introArt { justify-content: flex-start; }
+  .topic { grid-template-columns: 36px minmax(0, 1fr); padding: 14px; gap: 10px; }
+  .topicNo { width: 34px; height: 34px; font-size: 15px; }
+  .bars li { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; }
+  .barLabel { grid-column: 1; }
+  .barValue { grid-column: 2; grid-row: 1; }
+  .barTrack { grid-column: 1 / span 2; }
+  .calcOp { width: 100%; text-align: center; }
+  .calcBox { flex-basis: 100%; }
+  .screenRow { grid-template-columns: 28px minmax(0, 1fr); padding: 10px; gap: 10px; }
+  .screenNo { width: 26px; height: 26px; font-size: 14px; }
+  .faqItem > summary { grid-template-columns: 28px minmax(0, 1fr) 18px; padding: 14px; font-size: 16px; gap: 10px; }
+  .faqAnswer { grid-template-columns: 28px minmax(0, 1fr); padding: 0 14px 14px; gap: 10px; }
+  .faqMark { width: 26px; height: 26px; font-size: 14px; }
+  .mini th, .mini td { padding: 8px 6px; font-size: 14px; }
+}
+@media print {
+  .faqItem > summary::after { content: ""; }
+}
+
+/* 実際のコードと日本語の説明を並べる */
+.codeRead { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; border: 1px solid #c9d6df; border-radius: 8px; overflow: hidden; }
+.codeRead li { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); border-top: 1px solid #dbe3e8; }
+.codeRead li:first-child { border-top: 0; }
+.codeRead code { display: block; padding: 10px 14px; background: #183d60; color: #f3f7f9; font: 13px/1.8 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0; }
+.codeRead p { margin: 0; padding: 10px 14px; font-size: 15px; line-height: 1.85; color: #2f4558; background: #fff; }
+@media (max-width: 760px) {
+  .codeRead li { grid-template-columns: 1fr; }
+  .codeRead code { font-size: 12px; }
+}
+.groupLead { margin: -8px 0 18px; font-size: 16px; line-height: 1.9; color: #3d5266; }
+
+/* 長いファイル名（components/ConfigurationHistory.tsx など）がスマホではみ出さないよう、途中で折り返す */
+.prose li, .prose p { overflow-wrap: anywhere; }
+
+/* 目次の補足 */
+.introList { margin: 0 0 12px; padding-left: 22px; font-size: 16px; line-height: 1.9; }
+.introList li { margin-bottom: 4px; }
+.setupCallout { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 16px; align-items: start; margin: 0 0 36px; padding: 20px 22px; border: 2px solid #d9892b; border-radius: 10px; background: #fdf6e9; }
+.setupCallout strong { display: block; font-size: 18px; color: #153f65; line-height: 1.6; }
+.setupCallout p { margin: 6px 0 14px; font-size: 16px; line-height: 1.9; color: #3d5266; }
+
+/* 本文中のコマンド（入力する文字）。スマホでも横にはみ出さないよう折り返す */
+.prose pre { margin: 10px 0 24px; padding: 14px 16px; background: #183d60; color: #f3f7f9; border-radius: 8px; font: 14px/1.85 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.prose pre code { font: inherit; color: inherit; background: none; padding: 0; }
+.prose :not(pre) > code { font: .9em/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #e6edf2; color: #183d60; padding: 1px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+
+/* ターミナルの画面の例 */
+.term { border-radius: 10px; overflow: hidden; border: 2px solid #183d60; background: #10273d; }
+.termBar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #183d60; color: #fff; font-size: 14px; font-weight: 700; }
+.termBar i { width: 9px; height: 9px; border-radius: 50%; background: #ffffff88; display: inline-block; }
+.termBar span { margin-left: 8px; }
+.termBody { list-style: none; margin: 0; padding: 12px 14px; display: grid; gap: 2px; }
+.termBody li { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.termBody li > small { font-size: 12px; font-weight: 700; color: #f6c98a; }
+.termBody li.out > small { color: #9fb6c9; }
+.termBody code { font: 14px/1.8 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #f3f7f9; white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0; }
+.termBody li.out code { color: #b9cad8; }
+.termBody li.note { grid-template-columns: 1fr; }
+.termBody li.note p { margin: 6px 0 2px; font-size: 14px; line-height: 1.7; color: #f6c98a; }
+
+@media (max-width: 760px) {
+  .setupCallout { grid-template-columns: 1fr; padding: 16px; }
+  .termBody li { grid-template-columns: 1fr; gap: 0; }
+  .termBody li > small { margin-top: 6px; }
+  .termBody code { font-size: 13px; }
+  .prose pre { font-size: 13px; padding: 12px; }
+}
