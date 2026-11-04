@@ -1,0 +1,25 @@
+{
+  "name": "四半期決算整理仕訳作業",
+  "summary": "整理前試算表・固定資産台帳・決算整理資料をもとに、四半期決算の整理仕訳（減価償却・前払費用・引当金など）を作成します。",
+  "inputs": [
+    {
+      "id": "trial_balance",
+      "label": "整理前試算表",
+      "file": "trial-balance.csv",
+      "description": "会計ソフトから出力した、四半期末時点の整理前の残高試算表（期首からの累計）"
+    },
+    {
+      "id": "fixed_assets",
+      "label": "固定資産台帳",
+      "file": "fixed-assets.csv",
+      "description": "固定資産ごとの取得日・取得価額・耐用年数・償却済額"
+    },
+    {
+      "id": "closing_memo",
+      "label": "決算整理資料",
+      "file": "closing-memo.csv",
+      "description": "各部門から集めた、決算整理が必要な事項のメモ"
+    }
+  ],
+  "instructionPlaceholder": "例：2025年度 第3四半期（2025年10〜12月）の決算整理をしてください"
+}

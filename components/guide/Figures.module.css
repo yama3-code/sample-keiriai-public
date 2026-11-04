@@ -1,0 +1,115 @@
+/* 解説の図解・イラスト用。文字は本文と同じく大きめにし、スマホでは縦に並べる。 */
+.illust { display: block; flex: none; max-width: 100%; height: auto; }
+
+.figure { margin: 26px 0 38px; padding: 24px; background: #fff; border: 1px solid #c9d6df; border-radius: 10px; min-width: 0; }
+.figcaption { display: flex; flex-direction: column; gap: 4px; margin-bottom: 20px; }
+.figcaption strong { font-size: 19px; line-height: 1.6; color: #153f65; }
+.figcaption span { font-size: 15px; color: #4f6679; line-height: 1.8; }
+.note { margin: 18px 0 0; padding-top: 14px; border-top: 1px dashed #c9d6df; font-size: 16px; line-height: 1.9; color: #4a6073; }
+
+.card { height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 16px 12px; border-radius: 10px; background: #f3f7f9; border: 1px solid #d5e0e7; min-width: 0; }
+.card strong { font-size: 17px; line-height: 1.55; color: #153f65; }
+.card p { margin: 2px 0 0; font-size: 16px; line-height: 1.8; color: #3d5266; overflow-wrap: anywhere; }
+.who { font-size: 13px; font-weight: 700; color: #fff; background: #35648d; border-radius: 999px; padding: 1px 10px; }
+.ok { background: #eef8f2; border-color: #b9dcc7; }
+.warn { background: #fdf6e9; border-color: #ecd3a3; }
+.stop { background: #fbefed; border-color: #e8c1ba; }
+.plain { background: #fff; }
+
+.flow { list-style: none; margin: 0; padding: 0; display: flex; align-items: stretch; gap: 0; }
+.flowItem { flex: 1 1 0; display: flex; align-items: center; min-width: 0; }
+.flowItem > div { flex: 1; }
+.flowArrow { flex: none; padding: 0 6px; font-size: 26px; font-weight: 700; color: #35648d; }
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.stepItem { display: grid; grid-template-columns: 36px 52px minmax(0, 1fr); align-items: center; gap: 14px; padding: 12px 16px; background: #f3f7f9; border-radius: 10px; border: 1px solid #d5e0e7; }
+.stepItem small { display: block; font-size: 13px; color: #4f6679; font-weight: 700; }
+.stepItem strong { display: block; font-size: 17px; color: #153f65; line-height: 1.6; }
+.stepItem p { margin: 4px 0 0; font-size: 16px; line-height: 1.8; color: #3d5266; }
+.stepNo { width: 34px; height: 34px; border-radius: 50%; background: #183d60; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 16px; }
+
+.grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cols3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cols4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.compareSide { border-radius: 10px; border: 1px solid #d5e0e7; padding: 16px 18px; background: #f3f7f9; min-width: 0; }
+.compareHead { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.compareHead strong { font-size: 18px; color: #153f65; line-height: 1.5; }
+.compareSide ul { margin: 0; padding-left: 22px; }
+.compareSide li { font-size: 16px; line-height: 1.85; margin: 4px 0; }
+
+.stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stats li { background: #f3f7f9; border: 1px solid #d5e0e7; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.statValue { font-size: 32px; font-weight: 750; color: #183d60; line-height: 1.2; }
+.statValue small { font-size: 16px; margin-left: 3px; }
+.statLabel { font-size: 15px; color: #3d5266; line-height: 1.6; }
+
+.talk { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.talk li { display: flex; align-items: flex-start; gap: 12px; }
+.talkRight { flex-direction: row-reverse; }
+.talkWho { flex: none; width: 68px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.talkWho small { font-size: 13px; color: #4f6679; font-weight: 700; text-align: center; }
+.bubble { margin: 4px 0 0; background: #eef3f6; border: 1px solid #d0dce4; border-radius: 14px; padding: 12px 16px; font-size: 16px; line-height: 1.85; min-width: 0; overflow-wrap: anywhere; }
+.talkRight .bubble { background: #fdf6e9; border-color: #ecd3a3; }
+
+/* 本文中の「もっと詳しく」 */
+.details { margin: 28px 0; border: 1px solid #c9d6df; border-radius: 10px; background: #f7f9fa; }
+.details > summary { cursor: pointer; padding: 16px 20px; font-size: 17px; font-weight: 700; color: #234564; list-style: none; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.details > summary::-webkit-details-marker { display: none; }
+.details > summary::before { content: "＋"; color: #35648d; }
+.details[open] > summary::before { content: "－"; }
+.details > summary small { font-size: 14px; font-weight: 400; color: #5a7082; }
+.detailsBody { padding: 0 20px 12px; }
+
+.figureGap { margin-top: 14px; }
+
+/* 積み木の図 */
+.stack { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 14px; }
+.stackMain { display: grid; gap: 8px; }
+.stackLayer { border-radius: 8px; padding: 14px 18px; background: #e3ecf2; border: 1px solid #c3d3de; display: flex; flex-direction: column; gap: 2px; }
+.stackLayer:nth-child(1) { background: #f3f7f9; }
+.stackLayer:nth-child(3) { background: #183d60; color: #fff; border-color: #183d60; }
+.stackLayer strong { font-size: 17px; }
+.stackLayer span { font-size: 15px; line-height: 1.7; }
+.stackSide { border-radius: 8px; padding: 14px 18px; border: 2px dashed #35648d; display: flex; flex-direction: column; gap: 6px; justify-content: center; }
+.stackSide strong { font-size: 17px; color: #153f65; }
+.stackSide span { font-size: 15px; }
+
+/* カッコの入れ子の図 */
+.nest { overflow-x: auto; }
+.nestOuter, .nestBox, .nestInner { border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.nestOuter { border: 2px solid #183d60; background: #f3f7f9; }
+.nestBox { border: 2px solid #35648d; background: #fff; flex: 1; }
+.nestInner { border: 2px solid #d9892b; background: #fdf6e9; }
+.nestOuter > span, .nestBox > span, .nestInner > span { font-size: 15px; font-weight: 700; color: #153f65; overflow-wrap: anywhere; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.nestBox p, .nestInner p { margin: 0; font-size: 15px; }
+.nestRow { display: flex; gap: 12px; }
+
+@media (max-width: 900px) {
+  .cols4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .figure { padding: 16px; }
+  .flow { flex-direction: column; }
+  .flowItem { flex-direction: column; width: 100%; }
+  .flowItem > div { width: 100%; }
+  .flowArrow { transform: rotate(90deg); padding: 2px 0; }
+  .compare, .cols2, .cols3 { grid-template-columns: 1fr; }
+  .stepItem { grid-template-columns: 32px 44px minmax(0, 1fr); gap: 10px; padding: 12px; }
+  /* スマホではイラストを左、文字を右に並べて縦の長さを抑える */
+  .card { display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 12px; row-gap: 2px; align-items: center; justify-items: start; text-align: left; padding: 12px 14px; }
+  .card > svg { grid-row: 1 / span 3; width: 48px; height: 48px; }
+  .card > * { grid-column: 2; }
+  .card > svg { grid-column: 1; }
+  .flowArrow { font-size: 22px; }
+  .stepItem svg { width: 44px; height: 44px; }
+  .detailsBody { padding: 0 14px 10px; }
+  .stack, .nestRow { grid-template-columns: 1fr; flex-direction: column; }
+}
+@media print {
+  .figure { break-inside: avoid; }
+  .details > summary::before { content: ""; }
+}

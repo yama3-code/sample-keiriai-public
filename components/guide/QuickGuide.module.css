@@ -1,0 +1,35 @@
+/* 「3分で分かる版」専用の見た目。色と余白は Guide.module.css に合わせる。 */
+.heading { font-size: 23px; line-height: 1.65; letter-spacing: -.02em; margin: 40px 0 12px; }
+.lead { font-size: 17px; line-height: 2; margin: 0 0 20px; color: #3d5266; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.step { border: 1px solid #cfd8e0; background: white; padding: 20px 22px; min-width: 0; }
+.step > p { font-size: 17px; line-height: 1.95; margin: 12px 0; }
+.stepHead { display: flex; align-items: center; gap: 14px; }
+.stepHead small { display: block; font-size: 13px; color: #5d7286; }
+.stepHead strong { font-size: 19px; color: #153f65; }
+.stepNo { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #183d60; color: white; font-weight: 700; }
+.sample { background: #f3f6f7; border: 1px solid #d6dee4; padding: 14px 16px; margin-top: 4px; min-width: 0; }
+.sampleLabel { display: block; font-size: 13px; font-weight: 700; color: #56728b; margin-bottom: 8px; }
+.sample dl { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px 16px; }
+.sample dl div { min-width: 0; }
+.sample dt { font-size: 13px; color: #667a8b; }
+.sample dd { margin: 0; font-size: 17px; font-weight: 600; overflow-wrap: anywhere; }
+.sample > p { font-size: 17px; line-height: 1.9; margin: 0; }
+.journal { width: 100%; border-collapse: collapse; font-size: 17px; background: white; }
+.journal th, .journal td { border: 1px solid #cdd7df; padding: 8px 12px; text-align: left; width: 50%; }
+.journal th { background: #e7edf2; font-size: 14px; }
+.journal b { color: #153f65; }
+.note { font-size: 14px !important; color: #5f7384; margin: 8px 0 0 !important; line-height: 1.8 !important; overflow-wrap: anywhere; }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.checks li { font-size: 17px; display: flex; gap: 10px; }
+.checks span { color: #2d7a52; font-weight: 700; }
+.caution { background: #fbf6ea; border-color: #e6d6ad; }
+.block { margin-top: 12px; }
+.points { margin: 0; padding-left: 22px; display: grid; gap: 12px; font-size: 17px; line-height: 1.95; }
+.points strong { color: #153f65; }
+.next { display: flex; flex-wrap: wrap; gap: 12px; margin: 40px 0 20px; padding-top: 26px; border-top: 1px solid #d4dce2; }
+@media (max-width: 760px) {
+  .step { padding: 16px; }
+  .stepHead strong { font-size: 17px; }
+  .next a { width: 100%; }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "PC経費配賦仕訳変換",
+  "summary": "管理部で一括計上したPC関連費用を、部門別のPC台数・人数で各部門へ配賦する振替仕訳を作成します。",
+  "inputs": [
+    {
+      "id": "pc_costs",
+      "label": "PC関連費用明細（当月分）",
+      "file": "pc-costs.csv",
+      "description": "管理部で計上したPC関連費用の一覧。費目ごとに配賦区分（台数基準・人数基準・配賦対象外）を記載"
+    },
+    {
+      "id": "pc_counts",
+      "label": "部門別PC台数",
+      "file": "pc-counts.csv",
+      "description": "情報システム担当が月末時点で集計した部門別のPC台数"
+    }
+  ],
+  "instructionPlaceholder": "例：対象月は2025年12月です"
+}

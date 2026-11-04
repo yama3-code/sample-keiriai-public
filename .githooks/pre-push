@@ -1,0 +1,5 @@
+#!/bin/sh
+# 過去のコミットに残った秘密も、GitHubへ送る前に調べる。
+set -eu
+cd "$(git rev-parse --show-toplevel)"
+node scripts/check-secrets.mjs --history

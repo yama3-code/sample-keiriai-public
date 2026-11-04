@@ -1,0 +1,5 @@
+#!/bin/sh
+# コミットする内容を検査し、秘密の設定があれば保存を止める。
+set -eu
+cd "$(git rev-parse --show-toplevel)"
+node scripts/check-secrets.mjs --staged

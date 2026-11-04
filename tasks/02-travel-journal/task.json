@@ -1,0 +1,19 @@
+{
+  "name": "旅費仕訳伝票変換",
+  "summary": "経費精算システムから出力した旅費の明細を、経費精算規程に照らしてチェックし、仕訳伝票に変換します。",
+  "inputs": [
+    {
+      "id": "travel",
+      "label": "旅費精算明細",
+      "file": "travel-expenses.csv",
+      "description": "経費精算システムから出力した、承認済みの旅費精算明細"
+    },
+    {
+      "id": "advances",
+      "label": "仮払一覧",
+      "file": "advances.csv",
+      "description": "出張前に支払った仮払金のうち、未精算のもの"
+    }
+  ],
+  "instructionPlaceholder": "例：12月申請分を処理してください"
+}

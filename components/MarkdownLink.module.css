@@ -1,0 +1,85 @@
+.link {
+  display: inline-block;
+  max-width: 100%;
+  min-width: 0;
+  vertical-align: baseline;
+  overflow-wrap: anywhere;
+}
+
+.trigger {
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-blue);
+  cursor: pointer;
+  text-align: left;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+
+.note,
+.destination {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.destination {
+  display: block;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+
+.confirmation {
+  display: block;
+  max-width: 100%;
+  margin-block: 6px 10px;
+  padding: 12px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-s);
+  background: var(--color-bg-sub);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.explanation {
+  display: block;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.proceed,
+.cancel {
+  max-width: 100%;
+  padding: 7px 10px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-s);
+  font-size: inherit;
+  line-height: 1.6;
+  text-align: left;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.proceed {
+  border-color: var(--color-navy);
+  background: var(--color-navy);
+  color: #fff;
+}
+
+.cancel {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.blocked {
+  overflow-wrap: anywhere;
+}
