@@ -33,7 +33,8 @@ function Contents({ index }: { index: GuideSearchItem[] }) {
     </div> : <nav aria-label="学習ガイドの章">
       <Link href="/guide" className={styles.coverLink} aria-current={pathname === "/guide" ? "page" : undefined}>ガイドの表紙</Link>
       <Link href="/guide/quick" className={styles.quickLink} aria-current={pathname === "/guide/quick" ? "page" : undefined}>3分で分かる版<small>はじめての方へ</small></Link>
-      <Link href="/guide/detail" className={styles.quickLink} aria-current={pathname.startsWith("/guide/detail") ? "page" : undefined}>くわしく読む<small>使い方とプログラムのしくみ</small></Link>
+      <Link href="/guide/detail" className={styles.quickLink} aria-current={pathname.startsWith("/guide/detail") && !pathname.startsWith("/guide/detail/setup") ? "page" : undefined}>くわしく読む<small>使い方とプログラムのしくみ</small></Link>
+      <Link href="/guide/detail/setup-overview" className={styles.quickLink} aria-current={pathname.startsWith("/guide/detail/setup") ? "page" : undefined}>動かす準備<small>環境構築・GitHub・APIキー</small></Link>
       {guideGroups.map((group) => <div key={group} className={styles.navGroup}>
         <p>{group}</p>
         {guideChapters.map((chapter, i) => chapter.group === group ? <Link href={`/guide/${chapter.slug}`} key={chapter.slug} className={styles.chapterLink} aria-current={pathname === `/guide/${chapter.slug}` ? "page" : undefined}><span>{String(i + 1).padStart(2, "0")}</span>{chapter.short}<ChapterStatus slug={chapter.slug} compact /></Link> : null)}

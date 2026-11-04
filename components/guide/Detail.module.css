@@ -122,3 +122,37 @@
 
 /* 長いファイル名（components/ConfigurationHistory.tsx など）がスマホではみ出さないよう、途中で折り返す */
 .prose li, .prose p { overflow-wrap: anywhere; }
+
+/* 目次の補足 */
+.introList { margin: 0 0 12px; padding-left: 22px; font-size: 16px; line-height: 1.9; }
+.introList li { margin-bottom: 4px; }
+.setupCallout { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 16px; align-items: start; margin: 0 0 36px; padding: 20px 22px; border: 2px solid #d9892b; border-radius: 10px; background: #fdf6e9; }
+.setupCallout strong { display: block; font-size: 18px; color: #153f65; line-height: 1.6; }
+.setupCallout p { margin: 6px 0 14px; font-size: 16px; line-height: 1.9; color: #3d5266; }
+
+/* 本文中のコマンド（入力する文字）。スマホでも横にはみ出さないよう折り返す */
+.prose pre { margin: 10px 0 24px; padding: 14px 16px; background: #183d60; color: #f3f7f9; border-radius: 8px; font: 14px/1.85 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.prose pre code { font: inherit; color: inherit; background: none; padding: 0; }
+.prose :not(pre) > code { font: .9em/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #e6edf2; color: #183d60; padding: 1px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+
+/* ターミナルの画面の例 */
+.term { border-radius: 10px; overflow: hidden; border: 2px solid #183d60; background: #10273d; }
+.termBar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #183d60; color: #fff; font-size: 14px; font-weight: 700; }
+.termBar i { width: 9px; height: 9px; border-radius: 50%; background: #ffffff88; display: inline-block; }
+.termBar span { margin-left: 8px; }
+.termBody { list-style: none; margin: 0; padding: 12px 14px; display: grid; gap: 2px; }
+.termBody li { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.termBody li > small { font-size: 12px; font-weight: 700; color: #f6c98a; }
+.termBody li.out > small { color: #9fb6c9; }
+.termBody code { font: 14px/1.8 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #f3f7f9; white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0; }
+.termBody li.out code { color: #b9cad8; }
+.termBody li.note { grid-template-columns: 1fr; }
+.termBody li.note p { margin: 6px 0 2px; font-size: 14px; line-height: 1.7; color: #f6c98a; }
+
+@media (max-width: 760px) {
+  .setupCallout { grid-template-columns: 1fr; padding: 16px; }
+  .termBody li { grid-template-columns: 1fr; gap: 0; }
+  .termBody li > small { margin-top: 6px; }
+  .termBody code { font-size: 13px; }
+  .prose pre { font-size: 13px; padding: 12px; }
+}

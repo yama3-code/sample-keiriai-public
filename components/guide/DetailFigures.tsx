@@ -41,6 +41,23 @@ function CodeRead({ id }: { id: string }) {
   </Figure>;
 }
 
+type TermLine = { kind: "in" | "out" | "note"; text: string };
+
+/** ターミナル（文字で指示を出す画面）の例。「入力」は自分で打つ行、「表示」は返ってくる行。 */
+function Terminal({ title, lines }: { title: string; lines: TermLine[] }) {
+  return <div className={d.term} role="img" aria-label={`${title}の例`}>
+    <div className={d.termBar}><i /><i /><i /><span>{title}</span></div>
+    <ol className={d.termBody}>{lines.map((line, i) => line.kind === "note"
+      ? <li key={i} className={d.note}><p>{line.text}</p></li>
+      : <li key={i} className={line.kind === "out" ? d.out : undefined}><small>{line.kind === "in" ? "入力する" : "表示（例）"}</small><code>{line.text}</code></li>)}</ol>
+  </div>;
+}
+
+/** 設定ファイルなどの1行ずつに、説明を並べる（コードを読むページと同じ見た目）。 */
+function Annotated({ lines }: { lines: { code: string; explanation: string }[] }) {
+  return <ol className={d.codeRead}>{lines.map((line, i) => <li key={i}><code>{line.code}</code><p>{line.explanation}</p></li>)}</ol>;
+}
+
 const yen = (n: number) => `${n.toLocaleString("ja-JP")}円`;
 
 // PCリース料 1,980,000円の台数基準の配賦（端数3円は開発部へ）
@@ -72,7 +89,7 @@ export const detailFigures: Record<string, Record<string, ReactNode>> = {
         { title: "業務を選ぶ", text: "AI経理エージェント／PC経費配賦／旅費仕訳／四半期決算整理" },
         { title: "やってほしいこと（依頼文）", text: "最大10,000文字。対象・ほしい結果・出し方・迷ったときの扱いを書く", key: true },
         { title: "資料", text: "CSV・Excel・PDF・画像を最大15個。定型業務は区分ごとにCSVを選ぶ" },
-        { title: "AIモデル／エフォート（考える深さ）／途中で質問してもらう", text: "最初はHaiku・低。質問をオフにすると、迷った事項は要確認へ" },
+        { title: "AIモデル／エフォート（考える深さ）／途中で質問してもらう", text: "最初の選択は、手元では設定ファイルで決めたモデル（見本ならSonnet）とエフォート中、公開時はHaiku・低。質問をオフにすると、迷った事項は要確認へ" },
         { title: "実行", text: "押すと資料が送られ、作業が始まる（1〜3分ほど）", button: "この業務を実行する", key: true },
       ]} />
     </Figure>,
@@ -174,7 +191,7 @@ export const detailFigures: Record<string, Record<string, ReactNode>> = {
     </Figure>,
     "モデルとエフォートの選び方": <Figure title="つまみの選び方の目安">
       <Compare
-        left={{ title: "Haiku・低", icon: "clock", tone: "plain", points: ["速くて安い（最初に選ばれている）", "動作の確認、単純な集計に", "まずはこれで試す"] }}
+        left={{ title: "Haiku・低", icon: "clock", tone: "plain", points: ["速くて安い（公開時は最初に選ばれている）", "動作の確認、単純な集計に", "まずはこれで試す"] }}
         right={{ title: "Sonnet・中", icon: "ai", tone: "plain", points: ["時間と料金は多めにかかる", "規程の判断が多い仕事、複雑な決算整理に", "判断がおかしいと感じたら試し直す"] }}
       />
     </Figure>,
@@ -350,6 +367,169 @@ export const detailFigures: Record<string, Record<string, ReactNode>> = {
         { icon: "shield", title: "書き換えられていないか" },
         { icon: "ticket", title: "まだ使っていないか" },
         { icon: "gear", title: "設定の版が同じか" },
+      ]} />
+    </Figure>,
+  },
+
+  "setup-overview": {
+    "準備は5段階": <Figure title="準備の5段階" caption="上から順に進めます。時間は、はじめての人の目安です。">
+      <Steps items={[
+        { icon: "gear", who: "20〜30分", title: "道具を入れる", text: "Node.js と Git（と、文字を書くソフト）" },
+        { icon: "folder", who: "10〜20分", title: "GitHubからコードを取ってくる", text: "非公開リポジトリか、公開リポジトリのどちらか" },
+        { icon: "key", who: "15〜30分", title: "AIの鍵を作って、設定ファイルに入れる", text: "専用のワークスペース・月の上限・キー・.env.local" },
+        { icon: "laptop", who: "10〜20分", title: "部品を入れて起動する", text: "npm ci → npm run dev → ブラウザで開く" },
+        { icon: "check", who: "20〜30分", title: "サンプルで試運転する", text: "正しい数字と見比べて、準備完了" },
+      ]} />
+    </Figure>,
+    "2つのリポジトリ、どちらを使う？": <Figure title="非公開リポジトリと公開リポジトリ" caption="アプリのしくみと画面は、どちらも同じです。">
+      <Compare
+        left={{ title: "非公開リポジトリ", icon: "lock", tone: "plain", points: ["持ち主と、招待された人だけが見られる", "最新の作業と、開発の内部記録が入る", "取得にはGitHubへのログインが必要", "持ち主・社内のメンバー向け"] }}
+        right={{ title: "公開リポジトリ", icon: "globe", tone: "plain", points: ["誰でも見られる", "内部の記録は入れていない", "ログインしなくても取得できる", "試してみたい人・社外の人向け"] }}
+      />
+    </Figure>,
+  },
+  "setup-tools": {
+    "ターミナルとは": <Figure title="ターミナルでの、やりとりの例" caption="オレンジの「入力する」行だけを自分で打ちます。灰色の行は、パソコンからの返事です。">
+      <Terminal title="ターミナル" lines={[
+        { kind: "in", text: "node -v" },
+        { kind: "out", text: "v22.23.4" },
+        { kind: "in", text: "git --version" },
+        { kind: "out", text: "git version 2.43.0" },
+        { kind: "note", text: "番号が出れば、その道具は入っています。数字は版によって変わります。" },
+      ]} />
+    </Figure>,
+    "入れるもの": <Figure title="入れるものは3つ">
+      <Grid columns={3} items={[
+        { icon: "gear", title: "Node.js", text: "アプリを動かす土台。部品を入れる道具（npm）も一緒に入る" },
+        { icon: "folder", title: "Git", text: "GitHubからコードを取ってくる・最新にする" },
+        { icon: "book", title: "文字を書くソフト", text: "設定ファイルを書く。Visual Studio Code がおすすめ" },
+      ]} />
+    </Figure>,
+  },
+  "setup-github": {
+    "GitHubとリポジトリ": <Figure title="クローンとプル" caption="最初に1回クローンし、そのあとは新しい版が出るたびにプルします。">
+      <Flow items={[
+        { icon: "cloud", who: "GitHub", title: "リポジトリ（コードの棚）" },
+        { icon: "folder", who: "はじめに1回", title: "クローン（取ってくる）", text: "git clone／GitHub Desktop の Clone" },
+        { icon: "laptop", who: "自分のパソコン", title: "手元のフォルダ" },
+        { icon: "restore", who: "新しい版のたびに", title: "プル（最新にする）", text: "git pull／Pull origin", tone: "ok" },
+      ]} />
+    </Figure>,
+    "方法A：GitHub Desktop で取る（ボタン操作）": <Figure title="GitHub Desktop の「Clone a repository」画面の見取り図" caption="実際の画面を簡単にした絵です。画面は英語ですが、押すところはこれだけです。">
+      <Screen title="GitHub Desktop ― Clone a repository" items={[
+        { title: "File → Clone repository…", text: "メニューから開く" },
+        { title: "GitHub.com のタブ（非公開リポジトリ）", text: "招待されたリポジトリが一覧に出るので選ぶ" },
+        { title: "URL のタブ（公開リポジトリ）", text: "https://github.com/yama3-code/sample-keiriai-public を貼る" },
+        { title: "Local path（保存先）", text: "作っておいた dev フォルダを選ぶ", key: true },
+        { title: "取得する", text: "押すと、dev フォルダの中にリポジトリのフォルダができる", button: "Clone", key: true },
+      ]} />
+    </Figure>,
+    "方法B：コマンドで取る（公開リポジトリ）": <Figure title="公開リポジトリを取ってくる例（Mac）">
+      <Terminal title="ターミナル" lines={[
+        { kind: "in", text: "cd ~/dev" },
+        { kind: "in", text: "git clone https://github.com/yama3-code/sample-keiriai-public.git" },
+        { kind: "out", text: "Cloning into 'sample-keiriai-public'..." },
+        { kind: "out", text: "Receiving objects: 100% (250/250), done." },
+        { kind: "in", text: "cd sample-keiriai-public" },
+        { kind: "note", text: "Windows の1行目は cd %USERPROFILE%\\dev です。" },
+      ]} />
+    </Figure>,
+  },
+  "setup-key": {
+    "Claude Console とは": <Figure title="AIを使えるようにする7つの手順">
+      <Steps items={[
+        { icon: "person", title: "アカウントを作る", text: "https://platform.claude.com" },
+        { icon: "yen", title: "支払いの設定をする", text: "最初は少額から" },
+        { icon: "folder", title: "専用のワークスペースを作る", text: "例：keiri-ai-local" },
+        { icon: "shield", title: "月の上限と通知を決める", text: "Spend limits" },
+        { icon: "key", title: "キーを作る", text: "ワークスペースを限定する" },
+        { icon: "sheet", title: ".env.local を作る", text: ".env.example をコピー" },
+        { icon: "check", title: "キーを書き込んで保存する", text: "保存したら起動し直す", tone: "ok" },
+      ]} />
+    </Figure>,
+    "手順7：キーを書き込んで保存する": <Figure title=".env.local の中身と、1行ずつの意味" caption="キーの部分は、例として「（ここに、コピーしたキーを貼る）」と書いています。本物のキーは、このように人に見せる場所には書きません。">
+      <Annotated lines={[
+        { code: "ANTHROPIC_API_KEY=（ここに、コピーしたキーを貼る）", explanation: "AIの鍵。「=」のすぐ後ろに、空白や引用符なしで1行に貼る" },
+        { code: "ANTHROPIC_MODEL=claude-haiku-5-5", explanation: "画面で最初に選ばれるモデル。試運転の間はHaikuにしておくと安心" },
+        { code: "UPSTASH_REDIS_REST_URL=（空欄のまま）", explanation: "公開するとき用の、共有の保存先の住所。手元では使わない" },
+        { code: "UPSTASH_REDIS_REST_TOKEN=（空欄のまま）", explanation: "公開するとき用の、共有の保存先の鍵。手元では使わない" },
+        { code: "SECURITY_STORE_PREFIX=keiri", explanation: "保存先の中の名札。そのままでよい" },
+        { code: "PUBLIC_RUNS_PER_HOUR=5 など PUBLIC_ で始まる行", explanation: "公開したときの回数などの上限。手元で動かすときは使われない" },
+      ]} />
+    </Figure>,
+  },
+  "setup-start": {
+    "手順4：起動する": <Figure title="起動したときの画面の例">
+      <Terminal title="ターミナル" lines={[
+        { kind: "in", text: "npm run dev" },
+        { kind: "out", text: "▲ Next.js 16.4.x (Turbopack)" },
+        { kind: "out", text: "- Local:         http://127.0.0.1:3000" },
+        { kind: "out", text: "✓ Ready in 714ms" },
+        { kind: "note", text: "「Ready」と出たら起動完了。ターミナルは開いたままにして、ブラウザで http://localhost:3000 を開きます。" },
+      ]} />
+    </Figure>,
+    "毎日の手順": <Figure title="2回目からの流れ">
+      <Flow items={[
+        { icon: "code", title: "ターミナルを開く" },
+        { icon: "folder", title: "フォルダへ移動", text: "cd ~/dev/…" },
+        { icon: "gear", title: "起動", text: "npm run dev" },
+        { icon: "browser", title: "ブラウザで使う", text: "localhost:3000" },
+        { icon: "stop", title: "止める", text: "Ctrl + C", tone: "warn" },
+      ]} />
+    </Figure>,
+  },
+  "setup-first-runs": {
+    "10回の練習メニュー": <Figure title="1〜3回目で見比べる、確認済みの正しい数字" caption="同梱のサンプルとマニュアルのまま実行した場合です。">
+      <Grid columns={3} items={[
+        { icon: "ticket", who: "旅費", title: "保留7明細", text: "仮払K-0031の返金4,800円。仕訳16行・合計225,980円" },
+        { icon: "laptop", who: "PC配賦", title: "24行・3,514,310円", text: "明細6は要確認、明細5は配賦対象外" },
+        { icon: "ledger", who: "四半期決算", title: "6仕訳・33,185,312円", text: "法人税等は対象外、顧客への補償は要確認" },
+      ]} />
+    </Figure>,
+    "8回目・9回目：マスタを変えて、戻す": <Figure title="規程を変えると、AIの判断が変わる" caption="大阪の宿泊13,500円（明細9）の扱いが、上限の書き方で変わります。">
+      <Compare
+        left={{ title: "上限 12,000円（元のまま）", icon: "stop", tone: "stop", points: ["明細9は上限を超える → 保留", "保留は7明細", "仕訳16行・合計225,980円"] }}
+        right={{ title: "上限 14,000円（書き換え後）", icon: "check", tone: "ok", points: ["明細9は上限内 → 仕訳", "保留は6明細", "仕訳17行・合計239,480円（見込み）"] }}
+      />
+    </Figure>,
+  },
+  "setup-examples": {
+    "例文の使い方": <Figure title="伝わるお願いの4つの部分">
+      <Grid columns={4} items={[
+        { icon: "sheet", title: "対象", text: "どの資料の、どの範囲（期間）か" },
+        { icon: "ledger", title: "ほしい結果", text: "表か、仕訳案か、要約か" },
+        { icon: "checker", title: "出し方", text: "件数と合計、除外した行と理由も" },
+        { icon: "question", title: "迷ったとき", text: "推測せずに質問、または要確認に" },
+      ]} />
+    </Figure>,
+  },
+  "setup-trouble": {
+    "まず、どの段階で止まったかを見る": <Figure title="つまずく場所は5つ" caption="左から順に進むので、止まった場所より左は、うまくいっています。">
+      <Flow items={[
+        { icon: "gear", title: "道具", text: "Node.js・Git・npm ci" },
+        { icon: "folder", title: "GitHub", text: "取得・最新にする" },
+        { icon: "key", title: "キー", text: ".env.local・Console" },
+        { icon: "laptop", title: "起動", text: "npm run dev・ブラウザ" },
+        { icon: "ai", title: "実行", text: "画面に番号や文が出る" },
+      ]} />
+    </Figure>,
+  },
+  "setup-share": {
+    "手元で使う・公開して使う": <Figure title="手元で使うことと、公開して使うことの違い">
+      <Compare
+        left={{ title: "手元で使う（いま）", icon: "laptop", tone: "plain", points: ["自分のパソコンのブラウザだけで使う", "設定は .env.local、記録は .local フォルダ", "モデル・エフォートを広く選べる", "共有の保存先（Redis）は不要"] }}
+        right={{ title: "公開して使う（これから）", icon: "globe", tone: "warn", points: ["URLを知っている人がブラウザで使える", "設定は公開先の環境変数、記録はRedis", "Haiku・Sonnet、低・中だけに絞られる", "使える範囲の制限と月の上限が必須"] }}
+      />
+    </Figure>,
+    "公開までの段取り（例）": <Figure title="公開までの7つの段取り">
+      <Steps items={[
+        { icon: "people", title: "使う範囲と人を決める", text: "例：経理部の5人、社内の回線だけ" },
+        { icon: "key", title: "公開用のワークスペースとキー", text: "月の上限と通知を設定" },
+        { icon: "globe", title: "本体用のVercelプロジェクト", text: "解説サイトとは別にする" },
+        { icon: "cabinet", title: "Upstash Redis と設定値", text: "環境変数を入れる" },
+        { icon: "checker", title: "試しの公開で確かめる", text: "確認リストの1〜5" },
+        { icon: "check", title: "本番として公開する" },
+        { icon: "clock", title: "しばらく毎日見守る", text: "利用状況と金額" },
       ]} />
     </Figure>,
   },
